@@ -1,0 +1,80 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+type EProps = {
+	company: string;
+	position: string;
+	date: string;
+	description: string;
+};
+
+const experiences: EProps[] = [
+	{
+		company: "Insurerity Digital",
+		date: "2023 - Present",
+		description:
+			"Building frontend applications for service providers in the insurance space in Ghana and Africa",
+		position: "Associate Software Developer",
+	},
+	{
+		company: "Vwaza Multimedia",
+		date: "Jan 2024 - Present",
+		description: "Building frontend of an entertainment platform for African creatives",
+		position: "Frontend Developer",
+	},
+	{
+		company: "Tryklas",
+		date: "2021 - 2022",
+		description:
+			"Building frontend solutions for an edutech platform. A place for instructors to host online classes with their students",
+		position: "Frontend Developer",
+	},
+	{
+		company: "Svetro",
+		date: "2021",
+		description:
+			"Designed UI and built part of a web platform for an organisation based in Pakisthan",
+		position: "Frontend Developer",
+	},
+];
+---
+
+<PageLayout meta={{ title: "Experiences" }}>
+	<h1 class="title mb-6 text-4xl">Experience</h1>
+	<p class="leading-6">
+		I have been a <span class="items-center rounded-[4px] bg-link/10 px-2 py-1"
+			>professional software developer</span
+		> for the past three years. I have worked on a variety of projects spanning Edutech and Insurtech
+		solutions. Although my time in Edutech was very short it was an important step in my career as it
+		gave me my first real world experience. I am really grateful for the work I got to do there. Below
+		is a breakdown of my experiences as a software developer.
+	</p>
+
+	<div class="mt-8">
+		<ul class="space-y-4">
+			{
+				experiences.map((experience, idx) => {
+					return (
+						<li class="flex items-baseline justify-start gap-x-8">
+							<div class="flex flex-col items-center justify-center gap-y-4">
+								<div class="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#171717] font-bold text-white">
+									{idx + 1}
+								</div>
+								{idx !== experiences.length - 1 && (
+									<div class=" h-[100px] border-l-2 border-dashed border-[#171717] dark:border-[#A3A3A3]" />
+								)}
+							</div>
+							<div>
+								<h2 class="title mb-4 text-xl">{experience.position}</h2>
+								<p>
+									<span class="text-link">{experience.company}</span> - {experience.date}
+								</p>
+								<p>{experience.description}</p>
+							</div>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</div>
+</PageLayout>

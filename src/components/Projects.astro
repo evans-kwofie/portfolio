@@ -1,0 +1,54 @@
+---
+import { projects } from "src/utils/projects";
+---
+
+<div class="">
+	<div class="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+		{
+			projects.map((p, i) => (
+				<div class="">
+					<div
+						class={`flex h-[180px] w-full items-center justify-center rounded`}
+						style={{
+							backgroundColor: p.accent,
+						}}
+					>
+						<img src={p.image} alt="Project Logo" />
+					</div>
+					<div class="px-2 py-3">
+						<div class="flex items-center justify-between">
+							<h4 class="">{p.name}</h4>
+
+							<div class="flex items-center">
+								{p.repo?.length != 0 ? (
+									<a
+										href={p.repo}
+										target="_blank"
+										rel="noreferrer"
+										class="bg-primary/50 hover:bg-primary inline-block rounded-full px-2 text-base font-bold text-black transition-colors duration-100 ease-in-out"
+									>
+										<span class="text-xs font-bold uppercase">Code</span>
+									</a>
+								) : (
+									""
+								)}
+								{p.live?.length != 0 ? (
+									<a
+										href={p.live}
+										target="_blank"
+										rel="noreferrer"
+										class="bg-primary/50 hover:bg-primary ml-2 inline-block rounded-full px-2 text-base font-bold text-black transition-colors duration-100 ease-in-out"
+									>
+										<span class="text-xs font-bold uppercase">Live</span>
+									</a>
+								) : (
+									""
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</div>
+</div>

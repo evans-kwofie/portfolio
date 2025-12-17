@@ -1,0 +1,120 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import PostPreview from "@/components/blog/PostPreview.astro";
+import { getAllPosts, sortMDByDate } from "@/data/post";
+
+const allPosts = await getAllPosts();
+const recentPosts = sortMDByDate(allPosts).slice(0, 5);
+
+type TProps = {
+	friendlyName: string;
+	name: string;
+};
+
+const tools: TProps[] = [
+	{
+		friendlyName: "React",
+		name: "mdi:react",
+	},
+	{
+		friendlyName: "Nextjs",
+		name: "mdi:nextjs",
+	},
+	{
+		friendlyName: "Astro",
+		name: "mdi:astro",
+	},
+	{
+		friendlyName: "Angular",
+		name: "mdi:angular",
+	},
+	{
+		friendlyName: "Typescript",
+		name: "mdi:typescript",
+	},
+	{
+		friendlyName: "TailwindCSS",
+		name: "mdi:tailwind",
+	},
+	{
+		friendlyName: "Nodejs",
+		name: "mdi:nodejs",
+	},
+	{
+		friendlyName: "Firebase",
+		name: "mdi:firebase",
+	},
+	{
+		friendlyName: "Apollo Client",
+		name: "mdi:apollo",
+	},
+	{
+		friendlyName: "Tanstack Query",
+		name: "mdi:tanstack",
+	},
+
+	{
+		friendlyName: "Tanstack Start",
+		name: "mdi:react",
+	},
+	{
+		friendlyName: "Remix",
+		name: "mdi:remix",
+	},
+	{
+		friendlyName: "Hasura",
+		name: "mdi:hasura",
+	},
+];
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<div class="mb-4 text-base leading-relaxed md:text-lg">
+			<p>
+				I’m a software developer passionate about transforming complex ideas into simple, elegant,
+				and impactful digital experiences. I enjoy building scalable, user-focused applications that
+				make a real difference.
+			</p>
+			<p class="mt-4">
+				By day, I’m a Software Engineer at
+				<a href="https://insurerity.com" target="_blank" class="text-link">Insurerity Digital</a>,
+				where I help design and build innovative Insurtech platforms. I am also a member of the
+				development team at
+				<a href="https://vwaza.com" target="_blank" class="text-link">Vwaza.com</a>, where we’re
+				creating a platform that connects African creators and their audiences through music and
+				culture.
+			</p>
+			<p class="mt-4">
+				In my most rare spare times, I’m building
+				<a href="https://yenko.studio" target="_blank" class="text-link">Yenko Studio</a> — a creative
+				platform that brings ideas to life through technology, design, and storytelling.
+			</p>
+			<p class="mt-4">
+				When I'm not coding, I love immersing myself in music or escaping into a good story.
+			</p>
+		</div>
+	</section>
+
+	{
+		recentPosts.length > 0 && (
+			<section class="mt-16">
+				<h2 class="title mb-6 text-xl">Recent Posts</h2>
+				<ul class="space-y-4">
+					{recentPosts.map((post) => (
+						<li class="flex flex-col gap-1 sm:flex-row sm:gap-2">
+							<PostPreview post={post} />
+						</li>
+					))}
+				</ul>
+				<a
+					class="mt-6 inline-block sm:hover:text-accent"
+					href="/posts/"
+					aria-label="View all posts"
+				>
+					View all posts →
+				</a>
+			</section>
+		)
+	}
+</PageLayout>

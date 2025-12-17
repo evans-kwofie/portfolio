@@ -1,0 +1,40 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import { Icon } from "astro-icon/components";
+import { projects } from "src/utils/projects";
+---
+
+<PageLayout meta={{ title: "Projects" }}>
+	<div class="mb-10 text-center">
+		<h1 class="title text-4xl font-bold">Projects</h1>
+		<p class="mt-2 text-zinc-500 dark:text-zinc-400">
+			A selection of projects I've built, showcasing my work in web development.
+		</p>
+	</div>
+
+	<ul class="flex flex-col gap-y-4">
+		{
+			projects.map(({ name, description, live }) => (
+				<li>
+					<a
+						href={live}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="group flex items-center justify-between rounded-lg border border-zinc-200 p-4 transition-all duration-300 hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+					>
+						<div class="flex flex-col gap-y-2">
+							<div class="flex items-center gap-x-3">
+								<h3 class="font-semibold group-hover:underline">{name}</h3>
+								<Icon
+									name="mdi:arrow-top-right"
+									class="h-4 w-4 text-zinc-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+								/>
+							</div>
+							<p class="text-sm text-zinc-500 dark:text-zinc-400">{description}</p>
+						</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</PageLayout>

@@ -1,0 +1,86 @@
+---
+import Icon from "node_modules/astro-icon/components/Icon.astro";
+import SocialList from "../SocialList.astro";
+import ThemeToggle from "../ThemeToggle.astro";
+
+const allLinks: {
+	friendlyName: string;
+	isWebmention?: boolean;
+	link: string;
+	name: string;
+}[] = [
+	{
+		friendlyName: "Home",
+		link: "/",
+		name: "mdi:home",
+	},
+	{
+		friendlyName: "Projects",
+		link: "/projects",
+		name: "mdi:clipboard",
+	},
+	{
+		friendlyName: "Experience",
+		link: "/experiences",
+		name: "mdi:camera",
+	},
+	{
+		friendlyName: "Writing",
+		link: "/posts",
+		name: "mdi:pen",
+	},
+	{
+		friendlyName: "Github",
+		link: "https://github.com/0papi",
+		name: "mdi:github",
+	},
+
+	{
+		friendlyName: "LinkedIn",
+		link: "https://www.linkedin.com/in/evans-kojo-kwofie-31683112a/",
+		name: "mdi:linkedin",
+	},
+];
+---
+
+<nav
+	class="fixed bottom-2 left-1/2 mx-auto flex max-w-3xl -translate-x-1/2 transform items-center justify-center rounded-xl p-4 text-white transition-all duration-300 ease-in-out dark:text-black"
+>
+	<div
+		class="container mx-auto rounded-xl rounded-l-3xl rounded-r-3xl bg-[#000] p-2 transition-all duration-300 ease-in-out dark:bg-gray-100 dark:bg-blend-darken"
+	>
+		<ul class="flex list-none justify-center space-x-4">
+			{
+				allLinks.map((link) => (
+					<li class="flex h-[30px] w-[30px] items-center justify-center rounded-full  bg-[#171717] p-4 hover:scale-150 hover:transition-all hover:duration-300 hover:ease-in-out dark:bg-gray-300">
+						<button
+							class="flex flex-col items-center justify-center"
+							data-astro-prefetch
+							id="navBtn"
+							data-link={link.link}
+						>
+							<Icon class="h-4 w-4" name={link.name} />
+							<span class="sr-only">{link.friendlyName}</span>
+						</button>
+					</li>
+				))
+			}
+			<ThemeToggle />
+		</ul>
+	</div>
+</nav>
+
+<script>
+	// const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+	const navBtnEls = document.querySelectorAll("#navBtn");
+
+	navBtnEls.forEach((el) => {
+		el.addEventListener("click", () => {
+			const link = el.getAttribute("data-link");
+			if (link) {
+				// audio.play();
+				window.location.href = link;
+			}
+		});
+	});
+</script>

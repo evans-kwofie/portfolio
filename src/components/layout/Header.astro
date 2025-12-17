@@ -1,0 +1,83 @@
+---
+import Icon from "node_modules/astro-icon/components/Icon.astro";
+import ThemeToggle from "../ThemeToggle.astro";
+const allLinks: {
+	friendlyName: string;
+	link: string;
+	name: string;
+}[] = [
+	{ friendlyName: "Home", link: "/", name: "mdi:home" },
+	{ friendlyName: "Projects", link: "/projects", name: "mdi:clipboard" },
+	{ friendlyName: "Experience", link: "/experiences", name: "mdi:camera" },
+	// { friendlyName: "Writing", link: "/posts", name: "mdi:pen" },
+	{ friendlyName: "Bookshelf", link: "/reading", name: "mdi:pen" },
+
+	{ friendlyName: "Github", link: "https://github.com/0papi", name: "mdi:github" },
+	{
+		friendlyName: "LinkedIn",
+		link: "https://www.linkedin.com/in/evans-kojo-kwofie-31683112a/",
+		name: "mdi:linkedin",
+	},
+];
+
+const essentialPageLinks = allLinks.filter((link) =>
+	["Projects", "Experience", "Bookshelf"].includes(link.friendlyName),
+);
+
+const socialLinks = allLinks.filter((link) => ["Github"].includes(link.friendlyName));
+
+const url = new URL(Astro.request.url);
+---
+
+<header class="relative mb-4 flex items-center justify-between py-4">
+	<a
+		aria-current={url.pathname === "/" ? "page" : false}
+		class="inline-flex items-center grayscale transition-all duration-100 ease-in-out hover:filter-none"
+		href="/"
+	>
+		<img
+			src="https://ca.slack-edge.com/T06BDNX81S8-U06BBLPS9HQ-b26961a47713-512"
+			alt="kojo"
+			class="h-[50px] w-[50px] rounded-full"
+		/>
+	</a>
+
+	<div class="flex items-center gap-x-6">
+		<nav>
+			<ul class="flex items-center gap-x-6 text-lg">
+				{
+					essentialPageLinks.map((link) => (
+						<li>
+							<a
+								href={link.link}
+								class="text-sm transition hover:text-gray-500 dark:hover:text-gray-400"
+								data-astro-prefetch
+							>
+								{link.friendlyName}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="flex items-center gap-x-4">
+			{
+				socialLinks.map((link) => (
+					<a
+						href={link.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="transition hover:scale-125"
+						aria-label={link.friendlyName}
+					>
+						<Icon class="texts-sm h-6 w-6" name={link.name} />
+						<span class="sr-only">{link.friendlyName}</span>
+					</a>
+				))
+			}
+		</div>
+
+		<ThemeToggle />
+	</div>
+</header>
