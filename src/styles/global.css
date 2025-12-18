@@ -6,27 +6,32 @@
 	:root,
 	:root[data-theme="light"] {
 		color-scheme: light;
-		/* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
-		--theme-bg: 0deg 0% 98%;
-		--theme-link: 172deg 18% 41%;
-		--theme-text: 203deg 11% 15%;
-		--theme-accent: 351deg 66% 48%;
-		--theme-accent-2: 0deg 0% 7%;
-		--theme-quote: 351deg 66% 48%;
-		--theme-palette-50: #a3a3a3;
-		--theme-palette-500: #171717;
+		/* THE DAILY DISPATCH - Classic Newspaper Light */
+		--theme-bg: 45deg 30% 96%; /* Newsprint off-white */
+		--theme-link: 0deg 0% 15%; /* Near black links */
+		--theme-text: 0deg 0% 12%; /* Rich black text */
+		--theme-accent: 0deg 70% 45%; /* Classic newspaper red */
+		--theme-accent-2: 0deg 0% 5%; /* Pure black for headlines */
+		--theme-quote: 0deg 0% 25%; /* Dark gray for quotes */
+		--theme-palette-50: #666666;
+		--theme-palette-500: #111111;
+		--theme-code-bg: 45deg 20% 92%;
+		--theme-rule: 0deg 0% 20%; /* For horizontal rules */
 	}
 
 	:root[data-theme="dark"] {
 		color-scheme: dark;
-		--theme-bg: 210deg 6% 12%;
-		--theme-link: 330deg 49% 67%;
-		--theme-text: 220deg 3% 79%;
-		--theme-accent: 159deg 64% 45%;
-		--theme-accent-2: 0deg 0% 93%;
-		--theme-quote: 102deg 100% 86%;
-		--theme-palette-50: #a3a3a3;
-		--theme-palette-500: #171717;
+		/* THE EVENING EDITION - Inverted Newspaper */
+		--theme-bg: 30deg 10% 8%; /* Dark newsprint */
+		--theme-link: 45deg 30% 85%; /* Cream links */
+		--theme-text: 45deg 25% 88%; /* Off-white text */
+		--theme-accent: 0deg 65% 55%; /* Softer red for dark */
+		--theme-accent-2: 45deg 30% 95%; /* Cream for headlines */
+		--theme-quote: 45deg 15% 70%;
+		--theme-palette-50: #999999;
+		--theme-palette-500: #f0e6d6;
+		--theme-code-bg: 30deg 15% 12%;
+		--theme-rule: 45deg 20% 40%;
 	}
 
 	html {
@@ -34,21 +39,320 @@
 	}
 
 	body {
-		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
-		font-family: "Geist Sans", sans-serif;
+		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 text-base font-normal text-textColor;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		line-height: 1.7;
 	}
 
+	/* ═══════════════════════════════════════════════════════════
+	   NEWSPAPER TYPOGRAPHY
+	   ═══════════════════════════════════════════════════════════ */
 
-	/* Hide the # symbols that appear before headings */
-h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
-	display: none !important;
-  }
-  
-  /* Alternative approach if the above doesn't work */
-  .heading-content::before, 
-  .heading::before,
-  .heading-wrapper::before,
-  [class*="heading"]::before {
-	display: none !important;
-  }
+	/* Headlines - Bold, commanding, classic newspaper feel */
+	h1 {
+		font-family: "Times New Roman", Times, Georgia, serif;
+		font-weight: 900;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		text-transform: uppercase;
+		border-bottom: 3px double currentColor;
+		padding-bottom: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	h2 {
+		font-family: "Times New Roman", Times, Georgia, serif;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+		border-bottom: 1px solid currentColor;
+		padding-bottom: 0.3rem;
+	}
+
+	h3, h4, h5, h6 {
+		font-family: "Times New Roman", Times, Georgia, serif;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		line-height: 1.3;
+		font-style: italic;
+	}
+
+	/* Hide anchor symbols */
+	h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+		display: none !important;
+	}
+
+	.heading-content::before,
+	.heading::before,
+	.heading-wrapper::before,
+	[class*="heading"]::before {
+		display: none !important;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   PARAGRAPH & TEXT STYLING
+	   ═══════════════════════════════════════════════════════════ */
+
+	p {
+		text-align: justify;
+		hyphens: auto;
+		margin-bottom: 1.25em;
+	}
+
+	/* First paragraph after heading - drop cap style */
+	h1 + p::first-letter,
+	h2 + p::first-letter,
+	.drop-cap::first-letter {
+		float: left;
+		font-size: 4em;
+		line-height: 0.8;
+		padding-right: 0.1em;
+		font-weight: 700;
+		font-family: "Times New Roman", Times, Georgia, serif;
+	}
+
+	/* Small caps for emphasis */
+	strong {
+		font-weight: 700;
+		letter-spacing: 0.03em;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   LINKS - Understated but clear
+	   ═══════════════════════════════════════════════════════════ */
+
+	a {
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		text-decoration-thickness: 1px;
+	}
+
+	a:hover {
+		@apply text-accent;
+		text-decoration-thickness: 2px;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   BLOCKQUOTES - Classic pull quote style
+	   ═══════════════════════════════════════════════════════════ */
+
+	blockquote {
+		@apply my-8 mx-4 px-6 py-4;
+		border-left: 4px solid;
+		border-right: 4px solid;
+		@apply border-textColor/30;
+		font-style: italic;
+		font-size: 1.15em;
+		line-height: 1.6;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		position: relative;
+	}
+
+	blockquote::before {
+		content: '"';
+		font-size: 4em;
+		font-family: Georgia, serif;
+		position: absolute;
+		top: -0.2em;
+		left: 0.1em;
+		opacity: 0.15;
+		line-height: 1;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   CODE BLOCKS - Typewriter style, high contrast
+	   ═══════════════════════════════════════════════════════════ */
+
+	pre {
+		@apply bg-codeBg my-6 p-4 overflow-x-auto;
+		border: 1px solid;
+		@apply border-textColor/20;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 0.9em;
+		line-height: 1.5;
+	}
+
+	code {
+		@apply bg-codeBg px-1.5 py-0.5;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 0.9em;
+		border: 1px solid;
+		@apply border-textColor/10;
+	}
+
+	pre code {
+		@apply bg-transparent p-0 border-0;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   HORIZONTAL RULES - Classic newspaper dividers
+	   ═══════════════════════════════════════════════════════════ */
+
+	hr {
+		border: none;
+		border-top: 1px solid;
+		@apply border-textColor/30;
+		margin: 2rem auto;
+		width: 100%;
+		position: relative;
+	}
+
+	hr::before {
+		content: '§';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		@apply bg-bgColor px-3;
+		font-family: Georgia, serif;
+		font-size: 1.2em;
+		@apply text-textColor/50;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   LISTS - Clean, editorial style
+	   ═══════════════════════════════════════════════════════════ */
+
+	ul, ol {
+		@apply my-4 pl-6;
+	}
+
+	li {
+		@apply mb-2;
+		text-align: left;
+	}
+
+	ul li::marker {
+		content: '—  ';
+		@apply text-textColor/60;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   TABLES - Classic data presentation
+	   ═══════════════════════════════════════════════════════════ */
+
+	table {
+		@apply w-full my-6;
+		border-collapse: collapse;
+	}
+
+	th {
+		font-family: "Times New Roman", Times, serif;
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: 0.85em;
+		letter-spacing: 0.05em;
+		border-bottom: 2px solid currentColor;
+		@apply py-2 text-left;
+	}
+
+	td {
+		border-bottom: 1px solid;
+		@apply border-textColor/20 py-2;
+	}
+
+	/* ═══════════════════════════════════════════════════════════
+	   SELECTION - Newspaper ink highlight
+	   ═══════════════════════════════════════════════════════════ */
+
+	::selection {
+		@apply bg-accent/20 text-textColor;
+	}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NEWSPAPER UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════ */
+
+@layer components {
+	/* Masthead/headline style */
+	.masthead {
+		font-family: "Times New Roman", Times, Georgia, serif;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+	}
+
+	/* Byline style (author, date) */
+	.byline {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-style: italic;
+		font-size: 0.9em;
+		@apply text-textColor/70;
+	}
+
+	/* Dateline style */
+	.dateline {
+		font-family: "Times New Roman", Times, serif;
+		font-size: 0.8em;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		@apply text-textColor/60;
+	}
+
+	/* Section header */
+	.section-header {
+		font-family: "Times New Roman", Times, Georgia, serif;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		font-size: 0.75em;
+		border-bottom: 2px solid currentColor;
+		padding-bottom: 0.25rem;
+		margin-bottom: 1rem;
+		@apply text-accent;
+	}
+
+	/* Pull quote - for featured quotes */
+	.pull-quote {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 1.5em;
+		font-style: italic;
+		line-height: 1.4;
+		text-align: center;
+		@apply my-8 px-8 text-textColor/80;
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		@apply border-textColor/30 py-6;
+	}
+
+	/* Kicker - small text above headline */
+	.kicker {
+		font-family: "Times New Roman", Times, serif;
+		font-size: 0.75em;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		font-weight: 700;
+		@apply text-accent mb-1;
+	}
+
+	/* Deck - subheadline below main headline */
+	.deck {
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-size: 1.1em;
+		font-style: italic;
+		line-height: 1.4;
+		@apply text-textColor/80 mt-2;
+	}
+
+	/* Column rule - vertical divider between columns */
+	.column-rule {
+		border-right: 1px solid;
+		@apply border-textColor/20;
+	}
+
+	/* End mark - typically ■ at end of articles */
+	.end-mark::after {
+		content: ' ■';
+		@apply text-accent;
+	}
+
+	/* No underline override for nav links */
+	.no-underline {
+		text-decoration: none !important;
+	}
+
+	.no-underline:hover {
+		text-decoration: none !important;
+	}
 }

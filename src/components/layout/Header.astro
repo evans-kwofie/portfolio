@@ -29,28 +29,97 @@ const socialLinks = allLinks.filter((link) => ["Github"].includes(link.friendlyN
 const url = new URL(Astro.request.url);
 ---
 
-<header class="relative mb-4 flex items-center justify-between py-4">
-	<a
-		aria-current={url.pathname === "/" ? "page" : false}
-		class="inline-flex items-center grayscale transition-all duration-100 ease-in-out hover:filter-none"
-		href="/"
-	>
-		<img
-			src="https://ca.slack-edge.com/T06BDNX81S8-U06BBLPS9HQ-b26961a47713-512"
-			alt="kojo"
-			class="h-[50px] w-[50px] rounded-full"
-		/>
-	</a>
+<header class="relative mb-8 border-b-2 border-double border-textColor/40 pb-4">
+	<!-- Masthead row -->
+	<div class="flex items-center justify-between">
+		<a
+			aria-current={url.pathname === "/" ? "page" : false}
+			class="group flex items-center gap-3 no-underline transition-all duration-100 ease-in-out"
+			href="/"
+		>
+			<img
+				src="https://ca.slack-edge.com/T06BDNX81S8-U06BBLPS9HQ-b26961a47713-512"
+				alt="kojo"
+				class="h-[45px] w-[45px] rounded-full grayscale transition-all group-hover:grayscale-0"
+			/>
+			<span class="font-serif text-xl font-bold uppercase tracking-wide">EVANS K. KWOFIE</span>
+		</a>
 
-	<div class="flex items-center gap-x-6">
+		<!-- Mobile menu button -->
+		<button
+			id="mobile-menu-btn"
+			class="flex items-center justify-center p-2 md:hidden"
+			aria-label="Toggle menu"
+			aria-expanded="false"
+		>
+			<svg class="hamburger-icon h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M4 6h16M4 12h16M4 18h16"></path>
+			</svg>
+			<svg class="close-icon hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"></path>
+			</svg>
+		</button>
+
+		<!-- Desktop: Theme toggle and social -->
+		<div class="hidden items-center gap-x-4 md:flex">
+			{
+				socialLinks.map((link) => (
+					<a
+						href={link.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-textColor/70 transition hover:text-accent"
+						aria-label={link.friendlyName}
+					>
+						<Icon class="h-5 w-5" name={link.name} />
+						<span class="sr-only">{link.friendlyName}</span>
+					</a>
+				))
+			}
+			<ThemeToggle />
+		</div>
+	</div>
+
+	<!-- Desktop navigation bar -->
+	<nav class="mt-4 hidden border-t border-textColor/20 pt-3 md:block">
+		<ul class="flex items-center justify-center gap-x-8">
+			{
+				essentialPageLinks.map((link) => (
+					<li>
+						<a
+							href={link.link}
+							class="font-serif text-sm uppercase tracking-widest text-textColor/80 no-underline transition hover:text-accent"
+							data-astro-prefetch
+						>
+							{link.friendlyName}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+
+	<!-- Mobile navigation -->
+	<div
+		id="mobile-menu"
+		class="absolute left-0 right-0 top-full z-50 hidden border border-textColor/20 bg-bgColor p-4 shadow-lg md:hidden"
+	>
 		<nav>
-			<ul class="flex items-center gap-x-6 text-lg">
+			<ul class="flex flex-col gap-y-3">
 				{
 					essentialPageLinks.map((link) => (
-						<li>
+						<li class="border-b border-textColor/10 pb-3 last:border-0">
 							<a
 								href={link.link}
-								class="text-sm transition hover:text-gray-500 dark:hover:text-gray-400"
+								class="block font-serif text-sm uppercase tracking-widest text-textColor/80 no-underline transition hover:text-accent"
 								data-astro-prefetch
 							>
 								{link.friendlyName}
@@ -61,23 +130,48 @@ const url = new URL(Astro.request.url);
 			</ul>
 		</nav>
 
-		<div class="flex items-center gap-x-4">
+		<div class="mt-4 flex items-center gap-x-4 border-t border-textColor/20 pt-4">
 			{
 				socialLinks.map((link) => (
 					<a
 						href={link.link}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="transition hover:scale-125"
+						class="text-textColor/70 transition hover:text-accent"
 						aria-label={link.friendlyName}
 					>
-						<Icon class="texts-sm h-6 w-6" name={link.name} />
+						<Icon class="h-5 w-5" name={link.name} />
 						<span class="sr-only">{link.friendlyName}</span>
 					</a>
 				))
 			}
+			<ThemeToggle />
 		</div>
-
-		<ThemeToggle />
 	</div>
 </header>
+
+<script>
+	const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const hamburgerIcon = mobileMenuBtn?.querySelector(".hamburger-icon");
+	const closeIcon = mobileMenuBtn?.querySelector(".close-icon");
+
+	mobileMenuBtn?.addEventListener("click", () => {
+		const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+
+		mobileMenuBtn.setAttribute("aria-expanded", String(!isExpanded));
+		mobileMenu?.classList.toggle("hidden");
+		hamburgerIcon?.classList.toggle("hidden");
+		closeIcon?.classList.toggle("hidden");
+	});
+
+	// Close menu when clicking outside
+	document.addEventListener("click", (e) => {
+		if (!mobileMenuBtn?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+			mobileMenu?.classList.add("hidden");
+			hamburgerIcon?.classList.remove("hidden");
+			closeIcon?.classList.add("hidden");
+			mobileMenuBtn?.setAttribute("aria-expanded", "false");
+		}
+	});
+</script>

@@ -2,7 +2,7 @@
 // Supports weights 100-900
 import "@fontsource/geist-sans";
 import type { SiteMeta } from "@/types";
-
+import Analytics from "@vercel/analytics/astro";
 import BaseHead from "@/components/BaseHead.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
@@ -31,6 +31,7 @@ const {
 		<main id="main" class="pb-4">
 			<slot />
 		</main>
+		<Analytics />
 		<!-- <Footer /> -->
 	</body>
 </html>

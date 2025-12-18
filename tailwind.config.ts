@@ -31,11 +31,12 @@ export default {
 				quote: "hsl(var(--theme-quote) / <alpha-value>)",
 				"palette-50": "hsl(var(--theme-palette-50) / <alpha-value>)",
 				"palette-500": "hsl(var(--theme-palette-500) / <alpha-value>)",
+				codeBg: "hsl(var(--theme-code-bg) / <alpha-value>)",
 			},
 			fontFamily: {
 				// Add any custom fonts here
 				sans: [...fontFamily.sans],
-				serif: [...fontFamily.serif],
+				serif: ["Georgia", "Cambria", "Times New Roman", "Times", ...fontFamily.serif],
 			},
 			transitionProperty: {
 				height: "height",

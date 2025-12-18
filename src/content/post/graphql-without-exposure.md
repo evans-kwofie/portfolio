@@ -233,8 +233,36 @@ Response: { "id": "123", "name": "John Doe", "email": "john@example.com" }
 
 No GraphQL queries. No schema hints. No table names. Just clean JSON from a REST-like endpoint.
 
+### What about persisted queries?
+
+In my previous post, I mentioned persisted queries as another way to limit GraphQL exposure. They work by pre-registering your queries on the server and calling them by ID instead of sending the full query string. This prevents arbitrary queries and hides your schema structure.
+
+But persisted queries come with their own headaches. Every query needs a unique identifier, and your frontend has to call that exact ID. This means you need a build step to hash your queries, a way to sync those hashes between client and server, and a process to deploy new queries before the frontend code that uses them.
+
+In a fast-moving codebase where queries change frequently, this becomes a coordination problem. You can't just tweak a query and refresh—you have to regenerate the hash, update the server's allowlist, and make sure everything deploys in the right order. For teams shipping multiple times a day, that friction adds up.
+
+The BFF pattern sidesteps all of this. Your queries live on the server, so there's nothing to sync. You change a query, deploy your server, and you're done.
+
 ### The tradeoff
 
-You lose the ability to do client-side GraphQL operations, which means no Apollo DevTools and no client-side caching based on GraphQL types. But honestly, if you're using a framework with built-in data loading (Next.js, Remix, TanStack Start), you probably don't need those anyway. The framework handles caching and the server handles data fetching.
+You lose the ability to do client-side GraphQL operations, which means no Apollo DevTools and no client-side caching based on GraphQL types. But that doesn't mean you lose caching entirely.
+
+With the BFF pattern exposing REST-like endpoints, you can use libraries like [TanStack Query](https://tanstack.com/query) to get all the client-side caching goodness—stale-while-revalidate, background refetching, optimistic updates, and query invalidation. You're just caching JSON responses instead of normalized GraphQL data, which is often simpler to reason about anyway.
+
+```typescript
+// Works great with TanStack Query
+const { data: user } = useQuery({
+  queryKey: ['user', userId],
+  queryFn: () => fetch(`/api/users/${userId}`).then(res => res.json()),
+});
+```
+
+If you're in the Remix or React Router world, you might not even need an external library. Both frameworks provide built-in hooks for data fetching and caching:
+
+- **`useLoaderData`** - Access data from your route loader with automatic caching
+- **`useFetcher`** - Fetch data or submit forms without triggering a navigation, perfect for loading data on demand
+- **`useRevalidator`** - Manually revalidate all route data when needed
+
+These hooks handle caching, race conditions, and loading states out of the box. The loader runs on the server (where your GraphQL client lives), and the hooks manage the client-side state.
 
 You keep all the parts of GraphQL that actually matter for developer productivity: the type generation, the ability to fetch exactly what you need in a single query, and the schema as a contract between your frontend and backend teams.
