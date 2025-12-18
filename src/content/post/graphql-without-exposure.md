@@ -3,7 +3,7 @@ title: Type-Safe GraphQL Without Exposing Your Schema
 description: How to set up graphql-request and GraphQL Code Generator in a BFF pattern so you get full type safety without leaking your schema to the browser.
 publishDate: December 17, 2025
 tags: ["software development", "graphql", "typescript"]
-draft: true
+draft: false
 ---
 
 In my previous post, [Why I'm No Longer a GraphQL Maximalist](/posts/graphql-frontend-learnings/), I talked about the security trade-offs of GraphQL—how your queries are visible in the network tab and how introspection can expose your entire schema. But here's the thing: you don't have to give up GraphQL's developer experience to solve these problems.
