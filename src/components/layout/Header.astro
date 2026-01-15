@@ -12,7 +12,7 @@ const allLinks: {
 	// { friendlyName: "Writing", link: "/posts", name: "mdi:pen" },
 	{ friendlyName: "Bookshelf", link: "/reading", name: "mdi:pen" },
 
-	{ friendlyName: "Github", link: "https://github.com/0papi", name: "mdi:github" },
+	{ friendlyName: "Github", link: "https://github.com/evans-kwofie", name: "mdi:github" },
 	{
 		friendlyName: "LinkedIn",
 		link: "https://www.linkedin.com/in/evans-kojo-kwofie-31683112a/",
@@ -21,7 +21,7 @@ const allLinks: {
 ];
 
 const essentialPageLinks = allLinks.filter((link) =>
-	["Projects", "Experience", "Bookshelf"].includes(link.friendlyName),
+	["Projects", "Experience", "Bookshelf"].includes(link.friendlyName)
 );
 
 const socialLinks = allLinks.filter((link) => ["Github"].includes(link.friendlyName));
