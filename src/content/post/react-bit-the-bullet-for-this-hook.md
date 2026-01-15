@@ -1,7 +1,7 @@
 ---
 title: React bit the bullet for this hook (React Series)
 description: React 19’s 'use' API allows for conditional data fetching and surgical context subscriptions, finally breaking the most restrictive Rule of Hooks.
-publishDate: December 24, 2025
+publishDate: January 15, 2026
 tags: ["react", "web development", "javascript", "react-19"]
 draft: false
 ---
