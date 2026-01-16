@@ -24,8 +24,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.5.16(@types/node@20.12.7)(typescript@5.4.5))(tailwindcss@3.4.3)
       '@fontsource-variable/dm-sans':
-        specifier: ^5.0.5
-        version: 5.0.6
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/geist-sans':
         specifier: ^5.0.2
         version: 5.0.3
@@ -656,8 +656,8 @@ packages:
   '@expressive-code/plugin-text-markers@0.34.2':
     resolution: {integrity: sha512-yHVNoIvqAruxtMnmcITkjhyFaHg6fraitodSXWe5KLZcaBLLJ9AieE/RGhzHIKjRuG0zlEWMNd2y2nh/XIPBew==}
 
-  '@fontsource-variable/dm-sans@5.0.6':
-    resolution: {integrity: sha512-+CNVseJRlYGB4gUZ2L7yTeCHHBKAMVVhqUz85nb/OoU0hketJrWCHOUJwF5W2MpZCeE0JqJmDFAsEdx8znkrGw==}
+  '@fontsource-variable/dm-sans@5.2.8':
+    resolution: {integrity: sha512-AxkvMTvNWgfrmlyjiV05vlHYJa+nRQCf1EfvIrQAPBpFJW0O9VTz7oAFr9S3lvbWdmnFoBk7yFqQL86u64nl2g==}
 
   '@fontsource/geist-sans@5.0.3':
     resolution: {integrity: sha512-oGwoSIqNPMvjtCwj1lZaEr47MeiG27XPhypwkF643u1TQduvwbm3V3hYB01JekeaT34SAGP4I1h+WCdRpJkcwA==}
@@ -665,6 +665,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -672,6 +673,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@iconify-json/mdi@1.1.66':
     resolution: {integrity: sha512-7KPF2RVUUWav/hXCM8Ti/smqu3cmgePJpiX9CSkldiL+80+eBRBeKlc4vPOc9jhAItlqIU1vKsbKoPP0JIfgbg==}
@@ -2002,6 +2004,7 @@ packages:
   eslint-plugin-markdown@4.0.1:
     resolution: {integrity: sha512-5/MnGvYU0i8MbHH5cg8S+Vl3DL+bqRNYshk1xUO86DilNBaxtTkhH+5FD0/yO03AmlI6+lfNFdk2yOw72EPzpA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: Please use @eslint/markdown instead
     peerDependencies:
       eslint: '>=8'
 
@@ -2052,6 +2055,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -2281,6 +2285,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -2433,6 +2438,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -3570,6 +3576,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup@4.17.0:
@@ -4747,7 +4754,7 @@ snapshots:
     dependencies:
       '@expressive-code/core': 0.34.2
 
-  '@fontsource-variable/dm-sans@5.0.6': {}
+  '@fontsource-variable/dm-sans@5.2.8': {}
 
   '@fontsource/geist-sans@5.0.3': {}
 
